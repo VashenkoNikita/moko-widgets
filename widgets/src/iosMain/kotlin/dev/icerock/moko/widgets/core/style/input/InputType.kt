@@ -129,8 +129,9 @@ actual fun InputType.Companion.digits(mask: String?): InputType {
     }
 }
 
+val delegate = DefaultFormatterUITextFieldDelegate(inputFormatter = mask?.let { createDefaultTextFormatter(it) })
+
 private fun applyFormatter(mask: String?, textField: UITextField) {
-    val delegate = DefaultFormatterUITextFieldDelegate(inputFormatter = mask?.let { createDefaultTextFormatter(it) })
     textField.delegate = delegate
     objc_setAssociatedObject(
         `object` = textField,
@@ -141,7 +142,6 @@ private fun applyFormatter(mask: String?, textField: UITextField) {
 }
 
 private fun applyFormatter(mask: String?, textView: UITextView) {
-    val delegate = DefaultFormatterUITextFieldDelegate(inputFormatter = mask?.let { createDefaultTextFormatter(it) })
     textView.delegate = delegate
     objc_setAssociatedObject(
         `object` = textView,
